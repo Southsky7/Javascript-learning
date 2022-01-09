@@ -281,3 +281,94 @@
 
 
 
+# 自己做网页：
+
+- select提示文字:
+
+```xml
+<option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+```
+
+- 多选框
+
+- ```html
+      <label><input name="Fruit" type="checkbox" value="" />苹果 </label> 
+        <label><input name="Fruit" type="checkbox" value="" />桃子 </label> 
+        <label><input name="Fruit" type="checkbox" value="" />香蕉 </label> 
+        <label><input name="Fruit" type="checkbox" value="" />梨 </label>
+  ```
+
+- flex布局:子元素在水平方向上从左至右排列，子元素不会脱离文档流，缺点是不支持低版本IE。
+
+- html图片按比例缩小:只设置宽度
+
+- 设置span间距:先把span的display设置为inline-block，在设置padding即可。
+
+# JS算法
+
+- 变量允许计算机以一种动态的形式来存储和操作数据， 即通过操作指向数据的指针而不是数据本身来实现
+
+- const命名常量时的常见做法是全部使用大写字母，单词之间用下划线分隔。
+
+- 与字符串不同，数组的条目是 可变的 并且可以自由更改，即使数组是用 `const` 声明的
+
+- push()，添加一项到数组末尾   shift(),移除数组第一项且返回被移除项。 pop()，移除数组最后一项且返回被移除的项。unshift(),添加一项到数组开头。
+
+- === 与 == 的区别是 === 不会进行类型转换
+
+- 遍历数组最常用方法:
+
+  - ```js
+    for (let i = 0; i < arr.length; i++) {
+       console.log(arr[i]);
+    }
+    ```
+
+- 生成某个范围内的随即数字:
+
+  - ```js
+    Math.floor(Math.random() * (max - min + 1)) + min
+    ```
+
+- 如果想写一个递归函数，返回一个数字 `1` 到 `n` 的连续数组。 这个函数需要接收一个参数 `n` 代表最终数字。 然后会持续的调用自身，传入一个比 `n` 更小的值一直到传入的值是 `1` 为止。 函数如下：
+
+  ```javascript
+  function countup(n) {
+    if (n < 1) {
+      return [];
+    } else {
+      const countArray = countup(n - 1);
+      countArray.push(n);
+      return countArray;
+    }
+  }
+  console.log(countup(5));
+  ```
+
+  值 `[1, 2, 3, 4, 5]` 将显示在控制台中。
+
+  起初，这似乎是违反直觉的，因为 `n` 的值*递减*，但是最终数组中的值却*递增*。 之所以发生这种情况，**是因为在递归调用返回之后，才调用 push**。 在将 `n` pushed 进数组时，`countup(n - 1)` 已经调用赋值成功并返回了 `[1, 2, ..., n - 1]`。   !!!!!!!!!!
+
+- ```js
+  const s = [5, 6, 7];
+  s = [1, 2, 3];
+  s[2] = 45;
+  console.log(s);
+  ```
+
+  `s = [1, 2, 3]` 将导致错误。 `console.log` 将显示值 `[5, 6, 45]`。
+
+  如你所见，你可以改变对象 `[5, 6, 7]` 本身，变量 `s` 仍将指向更改后的数组 `[5, 6, 45]`。 像所有数组一样，`s` 中的数组元素是可变的，但是因为使用了 `const`，所以不能使用变量标识符 `s` 来指向一个使用赋值运算符的不同数组。可以看出，`const` 声明并不会真的保护数据不被改变。 为了确保数据不被改变，JavaScript 提供了一个函数 `Object.freeze`。
+
+  - ```js
+    let obj = {
+      name:"FreeCodeCamp",
+      review:"Awesome"
+    };
+    Object.freeze(obj);
+    obj.review = "bad";
+    obj.newProp = "Test";
+    console.log(obj);
+    ```
+
+  - `obj.review` 和 `obj.newProp` 赋值将导致错误，因为我们的编辑器默认在严格模式下运行，控制台将显示值 `{ name: "FreeCodeCamp", review: "Awesome" }`。
